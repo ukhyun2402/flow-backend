@@ -1,0 +1,152 @@
+{
+  "$defs": {
+    "Edge": {
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "title": "From",
+          "type": "string"
+        },
+        "port": {
+          "enum": [
+            "success",
+            "error",
+            "true",
+            "false"
+          ],
+          "title": "Port",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        }
+      },
+      "required": [
+        "from",
+        "port",
+        "to"
+      ],
+      "title": "Edge",
+      "type": "object"
+    },
+    "Node": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[A-Za-z0-9_-]{1,80}$",
+          "title": "Id",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "name",
+        "config"
+      ],
+      "title": "Node",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "specVersion": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Specversion",
+      "type": "string"
+    },
+    "id": {
+      "pattern": "^[A-Za-z0-9_-]{1,80}$",
+      "title": "Id",
+      "type": "string"
+    },
+    "revision": {
+      "minimum": 1,
+      "title": "Revision",
+      "type": "integer"
+    },
+    "name": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Name",
+      "type": "string"
+    },
+    "inputSchema": {
+      "additionalProperties": true,
+      "title": "Inputschema",
+      "type": "object"
+    },
+    "outputSchema": {
+      "additionalProperties": true,
+      "title": "Outputschema",
+      "type": "object"
+    },
+    "resources": {
+      "additionalProperties": {
+        "items": {
+          "type": "string"
+        },
+        "type": "array"
+      },
+      "title": "Resources",
+      "type": "object"
+    },
+    "nodes": {
+      "items": {
+        "$ref": "#/$defs/Node"
+      },
+      "maxItems": 500,
+      "minItems": 1,
+      "title": "Nodes",
+      "type": "array"
+    },
+    "edges": {
+      "items": {
+        "$ref": "#/$defs/Edge"
+      },
+      "maxItems": 1500,
+      "title": "Edges",
+      "type": "array"
+    },
+    "settings": {
+      "additionalProperties": true,
+      "title": "Settings",
+      "type": "object"
+    },
+    "ui": {
+      "additionalProperties": true,
+      "title": "Ui",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "revision",
+    "name",
+    "inputSchema",
+    "outputSchema",
+    "resources",
+    "nodes",
+    "edges",
+    "settings"
+  ],
+  "title": "Flow",
+  "type": "object"
+}

@@ -1,0 +1,26 @@
+{
+  "main": {
+    "vendor": "mysql",
+    "jdbcUrl": "jdbc:mysql://127.0.0.1:3306/app?useSSL=true",
+    "username": "flow_reader",
+    "passwordSecretRef": "MAIN_DB_PASSWORD",
+    "environment": "development",
+    "rollbackSafetyVerified": false
+  },
+  "oracle": {
+    "vendor": "oracle",
+    "jdbcUrl": "jdbc:oracle:thin:@//127.0.0.1:1521/FREEPDB1",
+    "username": "flow_reader",
+    "passwordSecretRef": "ORACLE_DB_PASSWORD",
+    "environment": "test",
+    "rollbackSafetyVerified": false
+  },
+  "tibero": {
+    "vendor": "tibero",
+    "jdbcUrl": "jdbc:tibero:thin:@127.0.0.1:8629:tibero",
+    "username": "flow_reader",
+    "passwordSecretRef": "TIBERO_DB_PASSWORD",
+    "environment": "test",
+    "rollbackSafetyVerified": false
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "flow-studio",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc -b && vite build",
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,css}\"",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@monaco-editor/react": "4.7.0",
+    "monaco-editor": "0.52.2",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.1",
+    "@types/react": "19.1.16",
+    "@types/react-dom": "19.1.9",
+    "prettier": "3.9.10",
+    "typescript": "5.9.3",
+    "vite": "7.1.9"
+  }
+}

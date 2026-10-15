@@ -1,0 +1,17 @@
+.tools/
+target/
+data/
+node_modules/
+frontend/dist/
+.env
+*.log
+drivers/*.jar
+frontend/*.tsbuildinfo
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+frontend/test-results/
+frontend/playwright-report/
+legacy/java/src/main/resources/static/

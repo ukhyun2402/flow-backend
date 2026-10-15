@@ -1,0 +1,5 @@
+[
+  {"id":"main","name":"ERP Oracle","vendor":"oracle","host":"127.0.0.1","port":1521,"database":"FREEPDB1","username":"flow_reader","passwordSecretRef":"MAIN_DB_PASSWORD","environment":"development","readonly":true,"tls":true},
+  {"id":"crm","name":"CRM MySQL","vendor":"mysql","host":"127.0.0.1","port":3306,"database":"crm","username":"flow_reader","passwordSecretRef":"CRM_DB_PASSWORD","environment":"development","readonly":true,"tls":true},
+  {"id":"tibero","name":"Core Tibero","vendor":"tibero","dsn":"FLOW_TIBERO","username":"flow_reader","passwordSecretRef":"TIBERO_DB_PASSWORD","environment":"test","readonly":true,"tls":true}
+]

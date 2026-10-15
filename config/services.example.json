@@ -1,0 +1,6 @@
+{
+  "main": {
+    "baseUrl": "https://api.example.com",
+    "bearerSecretRef": "SERVICE_API_TOKEN"
+  }
+}

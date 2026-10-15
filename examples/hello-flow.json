@@ -1,0 +1,61 @@
+{
+  "specVersion": "1.0",
+  "id": "hello",
+  "revision": 1,
+  "name": "인사 API",
+  "inputSchema": {
+    "type": "object",
+    "properties": { "name": { "type": "string" } },
+    "required": ["name"],
+    "additionalProperties": false
+  },
+  "outputSchema": {
+    "type": "object",
+    "properties": { "message": { "type": "string" } },
+    "required": ["message"]
+  },
+  "resources": { "databases": [], "services": [] },
+  "nodes": [
+    {
+      "id": "start",
+      "type": "trigger.http",
+      "name": "요청 수신",
+      "config": {
+        "method": "POST",
+        "path": "/hello",
+        "input": { "name": { "source": "body.name" } }
+      }
+    },
+    {
+      "id": "greeting",
+      "type": "transform",
+      "name": "인사 만들기",
+      "config": {
+        "mapping": {
+          "message": {
+            "op": "concat",
+            "args": ["안녕하세요, ", { "ref": "input.name" }, "님!"]
+          }
+        }
+      }
+    },
+    {
+      "id": "response",
+      "type": "response.http",
+      "name": "응답 반환",
+      "config": { "status": 200, "body": { "ref": "nodes.greeting.output" } }
+    }
+  ],
+  "edges": [
+    { "from": "start", "port": "success", "to": "greeting" },
+    { "from": "greeting", "port": "success", "to": "response" }
+  ],
+  "settings": { "timeoutMs": 10000, "authentication": "bearer" },
+  "ui": {
+    "positions": {
+      "start": { "x": 80, "y": 160 },
+      "greeting": { "x": 380, "y": 160 },
+      "response": { "x": 680, "y": 160 }
+    }
+  }
+}

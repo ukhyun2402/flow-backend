@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:flow:1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "specVersion",
+    "id",
+    "revision",
+    "name",
+    "inputSchema",
+    "outputSchema",
+    "resources",
+    "nodes",
+    "edges",
+    "settings"
+  ],
+  "properties": {
+    "specVersion": { "const": "1.0" },
+    "id": { "type": "string", "pattern": "^[a-zA-Z0-9_-]{1,80}$" },
+    "revision": { "type": "integer", "minimum": 1 },
+    "name": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "inputSchema": { "type": "object" },
+    "outputSchema": { "type": "object" },
+    "resources": {
+      "type": "object",
+      "properties": {
+        "databases": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        },
+        "services": {
+          "type": "array",
+          "items": { "type": "string" },
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "type", "name", "config"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-zA-Z0-9_-]{1,80}$" },
+          "type": {
+            "enum": [
+              "trigger.http",
+              "validate",
+              "transform",
+              "branch",
+              "db.query",
+              "db.command",
+              "http.call",
+              "transaction.begin",
+              "transaction.commit",
+              "transaction.rollback",
+              "error.raise",
+              "response.http"
+            ]
+          },
+          "name": { "type": "string", "minLength": 1 },
+          "config": { "type": "object" }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "maxItems": 1500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "port", "to"],
+        "properties": {
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "port": { "enum": ["success", "error", "true", "false"] }
+        }
+      }
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "timeoutMs": { "type": "integer", "minimum": 1, "maximum": 60000 },
+        "authentication": { "enum": ["public", "bearer"] }
+      },
+      "additionalProperties": false
+    },
+    "ui": { "type": ["object", "null"] }
+  }
+}
